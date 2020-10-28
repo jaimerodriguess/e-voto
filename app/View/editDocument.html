@@ -1,0 +1,146 @@
+<head>	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<style>
+	.float-left{
+		float: left;
+	}
+</style>
+
+<div class="container-fluid bg-3 text-center painel">
+	<div class="page-header header-page">
+		<h1>Numerador de Documentos</h1>
+	</div>
+
+
+
+<!-- Button trigger modal -->
+<div class="buttonsControl">	
+	<button type="button" class="btn btn-outline-secondary glyphicon glyphicon-plus" data-toggle="modal" data-target="#ModalCreate"></button>
+	<button type="button" class="btn btn-outline-secondary glyphicon glyphicon-search" data-toggle="modal" data-target="#ModalSearch"></button>	
+</div>
+<!-- Modal -->
+
+
+ <!-- Modal -->
+ <div class="modal fade" id="ModalEdit" tabindex="-1" role="dialog">
+	<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+	  	<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title text-danger">Editar Documentos</h5>
+                <form method="POST" action="../SysADM/?pagina=documentNumerator&metodo=update">
+					<input type="hidden" name="documentOwner" value="{{documentOwner}}">
+					<input type="hidden" name="idDocument" value="{{idDocument}}">
+			
+						
+					
+			</div>
+			
+			<div class="modal-body">
+				
+					
+                    <h5 class="modal-title ">Editando {{documentType}} Nº {{numberDocument}}</h5>
+					<br>
+				  
+					<div class="input-group">
+						<span class="input-group-addon" id="basic-addon3">Transito</span>
+						<select name="documentTransit" id="documentTransit" class="form-control">
+							
+							<option value="1">Interno</option>
+							<option value="2">Externo</option>
+						</select>				
+					</div><br>
+				
+					<div class="input-group">
+						<span class="input-group-addon" id="basic-addon3">Tramite</span>
+						<select name="documentProcessing" id="documentProcessing" class="form-control">
+							<option value="0" selected>Todos</option>
+							<option value="1">Normal</option>
+							<option value="2">Urgente</option>
+						</select>
+					</div><br>
+	
+					<div class="input-group">
+						<span class="input-group-addon" id="basic-addon3">Natureza</span>
+						<select name="documentNature" id="documentNature" class="form-control">
+							<option value="0" selected>Todos</option>
+							<option value="1">Ostensiva</option>
+							<option value="2">Sigilosa</option>
+							<option value="3">Reservada</option>
+							<option value="4">Confidencial</option>
+							<option value="5">Secreta</option>
+						</select>
+					  </div><br>
+	
+					  <div class="input-group">
+						<span class="input-group-addon" id="basic-addon3">Interessado</span>
+						<input type="text" value="{{documentInterested}}" name="documentInterested" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+					</div><br>
+	
+					<div class="input-group">
+						<span class="input-group-addon" id="basic-addon3">Assunto</span>
+						<input type="text" value="{{documentSubject}}" name="documentSubject" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+					</div><br>
+	
+					<div class="input-group">
+						<span class="input-group-addon" id="basic-addon3">Destino</span>
+						<input type="text" value="{{documentDestination}}" name="documentDestination" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+					</div><br>
+			</div>
+				
+			<div class="modal-footer">
+			
+				{% if delete %}
+					<button type="button" id="delete" name="delete" aria-placeholder="Deletar documento?" title="Deseja excluir esse documento?" class="btn btn-danger float-left" onclick='location.href="?pagina=documentNumerator&metodo=delete&id={{idDocument}}"'>Excluir documento?</button>
+				{% else %}
+					<button type="button" name="cancel" class="btn btn-warning float-left" onclick='location.href="?pagina=documentNumerator&metodo=cancel&id={{idDocument}}"'>Cancelar documento?</button>
+				{% endif %}
+				
+				<button type="button" class="btn btn-secondary" onclick='location.href="?pagina=documentNumerator"' data-dismiss="modal">Fechar</button>
+				
+				<button type="submit" name="edit" class="btn btn-primary">Editar</button>
+            </form>
+         
+			</div>
+	 	</div>
+	</div>
+</div>
+
+
+
+<script>
+$('#myModal').on('shown.bs.modal', function () {
+    $('#myInput').trigger('focus')
+})
+
+function configNumerator() {
+    var txt;
+	if (confirm("Press a button!")) {
+        txt = "You pressed OK!";
+    } else {
+        txt = "You pressed Cancel!";
+    }
+    document.getElementById("demo").innerHTML = txt;
+}
+
+$(document).ready(function() {
+    if(window.location.href.indexOf('#ModalEdit') != 1) {
+        $('#ModalEdit').modal('show');
+    }
+});
+
+$(document).ready(function(){
+    var value = "<?php echo {{documentTransit}};?>";
+
+    $('#documentTransit').find('[value="' + value + '"]').attr('selected', true);
+});
+
+$(document).ready(function(){
+    var value = "<?php echo {{delete}};?>";
+
+    $('#delete').find('[value="' + value + '"]').attr('actived', true);
+});
+</script>

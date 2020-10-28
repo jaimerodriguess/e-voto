@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <title>SysADM</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+  
+</head>
+<body>
+
+{{styleCss}}
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#">SysADM</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="../SysADM" class="glyphicon glyphicon-home"></a></li>
+        <li><a href="#"></a></li>
+        <li><a href="#"></a></li>
+        <li><a href="#"></a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+            {% if name %}
+                <li><a href="?pagina=login&metodo=login">{{name}}<span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            {% else %}
+                <li><a href="?pagina=login&metodo=logout"><span class="glyphicon glyphicon-log-out"></span>{{name}}</a></li>
+            {% endif %}
+      </ul>
+    </div>
+  </div>
+</nav>
+<br><br><br>
+{{dinamicArea}}
+
+<footer class="container-fluid text-center footer navbar-fixed-bottom">
+  <p>&copy; Copyrigth 2020 - Comando de Policiamento de Área Metropolitana Dois</p>
+</footer>
+
+</body>
+</html>
